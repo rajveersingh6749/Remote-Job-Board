@@ -1,4 +1,3 @@
-
 import {
     spinnerSearchEl,
     spinnerJobDetailsEl

@@ -1,9 +1,10 @@
 import {
+    state,
     jobDetailsContentEl
 } from '../common.js';
 
 const renderJobDetails = jobItem => {
-  const jobDetailsHTML = `
+    const jobDetailsHTML = `
         <img src="${jobItem.coverImgURL}" alt="#" class="job-details__cover-img">
 
         <a class="apply-btn" href="${jobItem.companyURL}" target="_blank">Apply <i class="fa-solid fa-square-arrow-up-right apply-btn__icon"></i></a>
@@ -14,7 +15,7 @@ const renderJobDetails = jobItem => {
                 <div class="job-info__below-badge">
                     <time class="job-info__time">${jobItem.daysAgo}d</time>
                     <button class="job-info__bookmark-btn">
-                        <i class="fa-solid fa-bookmark job-info__bookmark-icon"></i>
+                        <i class="fa-solid fa-bookmark job-info__bookmark-icon ${state.bookmarkJobItems.some(bookmarkJobItem => bookmarkJobItem.id === jobItem.id) && 'job-info__bookmark-icon--bookmarked'}"></i>
                     </button>
                 </div>
             </div>
@@ -37,25 +38,25 @@ const renderJobDetails = jobItem => {
                     <p class="qualifications__sub-text">Other qualifications may apply</p>
                 </div>
                 <ul class="qualifications__list">
-                    ${jobItem.qualifications.map((qualificationText) =>`<li class="qualifications__item">${qualificationText}</li>`).join("")};       
+                    ${jobItem.qualifications.map(qualificationText => `<li class="qualifications__item">${qualificationText}</li>`).join('')}
                 </ul>
             </section>
-
+            
             <section class="reviews">
                 <div class="reviews__left">
                     <h4 class="fourth-heading">Company reviews</h4>
                     <p class="reviews__sub-text">Recent things people are saying</p>
                 </div>
                 <ul class="reviews__list">
-                    ${jobItem.reviews.map((reviewText) =>`<li class="reviews__item">${reviewText}</li>`).join("")}      
+                    ${jobItem.reviews.map(reviewText => `<li class="reviews__item">${reviewText}</li>`).join('')}
                 </ul>
             </section>
         </div>
 
         <footer class="job-details__footer">
             <p class="job-details__footer-text">If possible, please reference that you found the job on <span class="u-bold">rmtDev</span>, we would really appreciate it!</p>
-        </footer>`
-    ;
+        </footer>
+    `;
     jobDetailsContentEl.innerHTML = jobDetailsHTML;
 };
 
